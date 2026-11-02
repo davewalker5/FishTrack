@@ -1,0 +1,953 @@
+{
+  "source": "/Users/dave/Temporary/FishTrack/OC-V-26-007-stabilised-trimmed.mp4",
+  "fingerprint": "sampled-sha256-v1:d8287b0a45466ea88a90780d7e8073b89bdb097bb00dff9aaed582612943375a",
+  "width": 1920,
+  "height": 1080,
+  "fps": 23.976023976023978,
+  "source_frames": 186,
+  "start_frame": 0,
+  "backend": "conventional",
+  "configuration": {
+    "processing": {
+      "start": 0.0,
+      "duration": 5.0,
+      "max_frames": 240,
+      "max_distance": 60.0,
+      "max_missing": 5,
+      "min_hits": 3,
+      "outline": true,
+      "track_ids": true,
+      "bounding_boxes": false,
+      "rois": [],
+      "detect_additional": false,
+      "appearance": true,
+      "tracking_threshold": 0.035,
+      "save_start_frame": null,
+      "select_roi": true,
+      "backend": "conventional",
+      "sam2_checkpoint": "/Users/dave/Workbench/Development/Projects/FishTrack/models/sam2.1_hiera_tiny.pt",
+      "sam2_model": "tiny",
+      "sam2_device": "cpu",
+      "sam2_min_area": 40,
+      "auto_roi": false,
+      "accept_auto_roi": false,
+      "grounding_model": "/Users/dave/Workbench/Development/Projects/FishTrack/models/grounding-dino-tiny",
+      "grounding_prompt": "fish.",
+      "grounding_threshold": 0.3,
+      "grounding_text_threshold": 0.25,
+      "grounding_device": "cpu",
+      "max_auto_rois": 10
+    },
+    "detection": {
+      "motion_threshold": 25.0,
+      "min_area": 80.0,
+      "max_area": 50000.0,
+      "max_aspect_ratio": 8,
+      "compensate": true,
+      "local_motion": true,
+      "min_residual_motion": 2.0,
+      "suppress_unreliable": true
+    },
+    "selected_rois": [
+      [
+        543,
+        216,
+        353,
+        312
+      ]
+    ]
+  },
+  "run_id": "5f6ad18b-e4fb-4215-b9b9-d6e1a320fe66",
+  "schema_version": 1,
+  "application_version": "1.1.0",
+  "coordinates": "source_pixels_top_left",
+  "frame_step": 1,
+  "processed_frames": 120,
+  "completion": "complete",
+  "observations": [
+    {
+      "frame": 0,
+      "timestamp": 0.0,
+      "track_id": 1,
+      "status": "observed",
+      "x": 719.0,
+      "y": 371.5,
+      "box": [
+        543.0,
+        216.0,
+        353.0,
+        312.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 1,
+      "timestamp": 0.04170833333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 722.5,
+      "y": 376.5,
+      "box": [
+        550.0,
+        224.0,
+        346.0,
+        306.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 2,
+      "timestamp": 0.08341666666666667,
+      "track_id": 1,
+      "status": "observed",
+      "x": 728.5,
+      "y": 382.5,
+      "box": [
+        556.0,
+        230.0,
+        346.0,
+        306.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 3,
+      "timestamp": 0.125125,
+      "track_id": 1,
+      "status": "observed",
+      "x": 731.5,
+      "y": 389.5,
+      "box": [
+        556.0,
+        234.0,
+        352.0,
+        312.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 4,
+      "timestamp": 0.16683333333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 735.5,
+      "y": 396.5,
+      "box": [
+        556.0,
+        238.0,
+        360.0,
+        318.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 5,
+      "timestamp": 0.20854166666666665,
+      "track_id": 1,
+      "status": "observed",
+      "x": 744.5,
+      "y": 405.5,
+      "box": [
+        576.0,
+        256.0,
+        338.0,
+        300.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 6,
+      "timestamp": 0.25025,
+      "track_id": 1,
+      "status": "observed",
+      "x": 744.5,
+      "y": 409.5,
+      "box": [
+        576.0,
+        260.0,
+        338.0,
+        300.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 7,
+      "timestamp": 0.2919583333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 750.5,
+      "y": 411.5,
+      "box": [
+        582.0,
+        262.0,
+        338.0,
+        300.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 8,
+      "timestamp": 0.33366666666666667,
+      "track_id": 1,
+      "status": "observed",
+      "x": 756.5,
+      "y": 419.5,
+      "box": [
+        588.0,
+        270.0,
+        338.0,
+        300.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 9,
+      "timestamp": 0.37537499999999996,
+      "track_id": 1,
+      "status": "observed",
+      "x": 764.5,
+      "y": 425.5,
+      "box": [
+        596.0,
+        276.0,
+        338.0,
+        300.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 10,
+      "timestamp": 0.4170833333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 768.5,
+      "y": 429.5,
+      "box": [
+        606.0,
+        286.0,
+        326.0,
+        288.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 11,
+      "timestamp": 0.45879166666666665,
+      "track_id": 1,
+      "status": "observed",
+      "x": 771.5,
+      "y": 430.5,
+      "box": [
+        606.0,
+        284.0,
+        332.0,
+        294.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 12,
+      "timestamp": 0.5005,
+      "track_id": 1,
+      "status": "observed",
+      "x": 772.5,
+      "y": 433.5,
+      "box": [
+        604.0,
+        284.0,
+        338.0,
+        300.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 13,
+      "timestamp": 0.5422083333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 775.5,
+      "y": 434.5,
+      "box": [
+        610.0,
+        288.0,
+        332.0,
+        294.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 14,
+      "timestamp": 0.5839166666666666,
+      "track_id": 1,
+      "status": "observed",
+      "x": 776.5,
+      "y": 435.5,
+      "box": [
+        614.0,
+        292.0,
+        326.0,
+        288.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 15,
+      "timestamp": 0.625625,
+      "track_id": 1,
+      "status": "observed",
+      "x": 776.5,
+      "y": 432.5,
+      "box": [
+        604.0,
+        280.0,
+        346.0,
+        306.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 16,
+      "timestamp": 0.6673333333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 782.5,
+      "y": 434.5,
+      "box": [
+        610.0,
+        282.0,
+        346.0,
+        306.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 17,
+      "timestamp": 0.7090416666666666,
+      "track_id": 1,
+      "status": "observed",
+      "x": 786.5,
+      "y": 430.5,
+      "box": [
+        614.0,
+        278.0,
+        346.0,
+        306.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 18,
+      "timestamp": 0.7507499999999999,
+      "track_id": 1,
+      "status": "observed",
+      "x": 782.5,
+      "y": 431.5,
+      "box": [
+        614.0,
+        282.0,
+        338.0,
+        300.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 19,
+      "timestamp": 0.7924583333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 782.5,
+      "y": 426.5,
+      "box": [
+        610.0,
+        274.0,
+        346.0,
+        306.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 20,
+      "timestamp": 0.8341666666666666,
+      "track_id": 1,
+      "status": "observed",
+      "x": 779.5,
+      "y": 425.5,
+      "box": [
+        604.0,
+        270.0,
+        352.0,
+        312.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 21,
+      "timestamp": 0.875875,
+      "track_id": 1,
+      "status": "observed",
+      "x": 766.5,
+      "y": 423.5,
+      "box": [
+        584.0,
+        262.0,
+        366.0,
+        324.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 22,
+      "timestamp": 0.9175833333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 776.5,
+      "y": 416.5,
+      "box": [
+        586.0,
+        248.0,
+        382.0,
+        338.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 23,
+      "timestamp": 0.9592916666666667,
+      "track_id": 1,
+      "status": "observed",
+      "x": 793.5,
+      "y": 427.5,
+      "box": [
+        596.0,
+        252.0,
+        396.0,
+        352.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 24,
+      "timestamp": 1.001,
+      "track_id": 1,
+      "status": "observed",
+      "x": 803.5,
+      "y": 421.5,
+      "box": [
+        606.0,
+        246.0,
+        396.0,
+        352.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 25,
+      "timestamp": 1.0427083333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 795.5,
+      "y": 420.5,
+      "box": [
+        594.0,
+        242.0,
+        404.0,
+        358.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 26,
+      "timestamp": 1.0844166666666666,
+      "track_id": 1,
+      "status": "observed",
+      "x": 807.5,
+      "y": 409.5,
+      "box": [
+        614.0,
+        238.0,
+        388.0,
+        344.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 27,
+      "timestamp": 1.1261249999999998,
+      "track_id": 1,
+      "status": "observed",
+      "x": 809.5,
+      "y": 405.5,
+      "box": [
+        616.0,
+        234.0,
+        388.0,
+        344.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 28,
+      "timestamp": 1.1678333333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 810.5,
+      "y": 405.5,
+      "box": [
+        624.0,
+        240.0,
+        374.0,
+        332.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 29,
+      "timestamp": 1.2095416666666665,
+      "track_id": 1,
+      "status": "observed",
+      "x": 805.5,
+      "y": 403.5,
+      "box": [
+        612.0,
+        232.0,
+        388.0,
+        344.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 30,
+      "timestamp": 1.25125,
+      "track_id": 1,
+      "status": "observed",
+      "x": 811.5,
+      "y": 399.5,
+      "box": [
+        618.0,
+        228.0,
+        388.0,
+        344.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 31,
+      "timestamp": 1.2929583333333332,
+      "track_id": 1,
+      "status": "observed",
+      "x": 803.5,
+      "y": 399.5,
+      "box": [
+        606.0,
+        224.0,
+        396.0,
+        352.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 32,
+      "timestamp": 1.3346666666666667,
+      "track_id": 1,
+      "status": "observed",
+      "x": 807.5,
+      "y": 401.5,
+      "box": [
+        610.0,
+        226.0,
+        396.0,
+        352.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 33,
+      "timestamp": 1.376375,
+      "track_id": 1,
+      "status": "observed",
+      "x": 807.5,
+      "y": 409.5,
+      "box": [
+        610.0,
+        234.0,
+        396.0,
+        352.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 34,
+      "timestamp": 1.4180833333333331,
+      "track_id": 1,
+      "status": "observed",
+      "x": 811.5,
+      "y": 415.5,
+      "box": [
+        614.0,
+        240.0,
+        396.0,
+        352.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 35,
+      "timestamp": 1.4597916666666666,
+      "track_id": 1,
+      "status": "observed",
+      "x": 820.5,
+      "y": 414.5,
+      "box": [
+        630.0,
+        246.0,
+        382.0,
+        338.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 36,
+      "timestamp": 1.5014999999999998,
+      "track_id": 1,
+      "status": "observed",
+      "x": 826.5,
+      "y": 410.5,
+      "box": [
+        636.0,
+        242.0,
+        382.0,
+        338.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 37,
+      "timestamp": 1.5432083333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 822.5,
+      "y": 406.5,
+      "box": [
+        632.0,
+        238.0,
+        382.0,
+        338.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 38,
+      "timestamp": 1.5849166666666665,
+      "track_id": 1,
+      "status": "observed",
+      "x": 822.5,
+      "y": 419.5,
+      "box": [
+        636.0,
+        254.0,
+        374.0,
+        332.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 39,
+      "timestamp": 1.626625,
+      "track_id": 1,
+      "status": "observed",
+      "x": 830.5,
+      "y": 424.5,
+      "box": [
+        640.0,
+        256.0,
+        382.0,
+        338.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 40,
+      "timestamp": 1.6683333333333332,
+      "track_id": 1,
+      "status": "observed",
+      "x": 832.5,
+      "y": 424.5,
+      "box": [
+        642.0,
+        256.0,
+        382.0,
+        338.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 41,
+      "timestamp": 1.7100416666666665,
+      "track_id": 1,
+      "status": "observed",
+      "x": 836.5,
+      "y": 417.5,
+      "box": [
+        650.0,
+        252.0,
+        374.0,
+        332.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 42,
+      "timestamp": 1.75175,
+      "track_id": 1,
+      "status": "observed",
+      "x": 868.5,
+      "y": 403.5,
+      "box": [
+        686.0,
+        242.0,
+        366.0,
+        324.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 43,
+      "timestamp": 1.7934583333333332,
+      "track_id": 1,
+      "status": "observed",
+      "x": 874.5,
+      "y": 417.5,
+      "box": [
+        692.0,
+        256.0,
+        366.0,
+        324.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 44,
+      "timestamp": 1.8351666666666666,
+      "track_id": 1,
+      "status": "observed",
+      "x": 878.5,
+      "y": 431.5,
+      "box": [
+        692.0,
+        266.0,
+        374.0,
+        332.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 45,
+      "timestamp": 1.8768749999999998,
+      "track_id": 1,
+      "status": "observed",
+      "x": 878.5,
+      "y": 435.5,
+      "box": [
+        692.0,
+        270.0,
+        374.0,
+        332.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 46,
+      "timestamp": 1.9185833333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 894.5,
+      "y": 439.5,
+      "box": [
+        712.0,
+        278.0,
+        366.0,
+        324.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 47,
+      "timestamp": 1.9602916666666665,
+      "track_id": 1,
+      "status": "observed",
+      "x": 912.5,
+      "y": 435.5,
+      "box": [
+        730.0,
+        274.0,
+        366.0,
+        324.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 48,
+      "timestamp": 2.002,
+      "track_id": 1,
+      "status": "observed",
+      "x": 956.5,
+      "y": 401.5,
+      "box": [
+        770.0,
+        236.0,
+        374.0,
+        332.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 49,
+      "timestamp": 2.043708333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 945.5,
+      "y": 425.5,
+      "box": [
+        752.0,
+        254.0,
+        388.0,
+        344.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 50,
+      "timestamp": 2.0854166666666667,
+      "track_id": 1,
+      "status": "observed",
+      "x": 953.5,
+      "y": 421.5,
+      "box": [
+        756.0,
+        246.0,
+        396.0,
+        352.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 51,
+      "timestamp": 2.127125,
+      "track_id": 1,
+      "status": "observed",
+      "x": 951.5,
+      "y": 417.5,
+      "box": [
+        758.0,
+        246.0,
+        388.0,
+        344.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 52,
+      "timestamp": 2.168833333333333,
+      "track_id": 1,
+      "status": "observed",
+      "x": 958.5,
+      "y": 442.5,
+      "box": [
+        768.0,
+        274.0,
+        382.0,
+        338.0
+      ],
+      "mask_area": null
+    },
+    {
+      "frame": 53,
+      "timestamp": 2.2105416666666664,
+      "track_id": 1,
+      "status": "lost",
+      "x": null,
+      "y": null,
+      "box": null,
+      "mask_area": null
+    },
+    {
+      "frame": 54,
+      "timestamp": 2.2522499999999996,
+      "track_id": 1,
+      "status": "lost",
+      "x": null,
+      "y": null,
+      "box": null,
+      "mask_area": null
+    },
+    {
+      "frame": 55,
+      "timestamp": 2.2939583333333333,
+      "track_id": 1,
+      "status": "lost",
+      "x": null,
+      "y": null,
+      "box": null,
+      "mask_area": null
+    },
+    {
+      "frame": 56,
+      "timestamp": 2.3356666666666666,
+      "track_id": 1,
+      "status": "lost",
+      "x": null,
+      "y": null,
+      "box": null,
+      "mask_area": null
+    },
+    {
+      "frame": 57,
+      "timestamp": 2.377375,
+      "track_id": 1,
+      "status": "lost",
+      "x": null,
+      "y": null,
+      "box": null,
+      "mask_area": null
+    }
+  ],
+  "statistics": {
+    "1": {
+      "observed_frames": 53,
+      "first_frame": 0,
+      "last_frame": 52,
+      "first_timestamp": 0.0,
+      "last_timestamp": 2.168833333333333,
+      "span_seconds": 2.168833333333333,
+      "coverage": 1.0,
+      "interruptions": 0,
+      "mean_box_area": 119533.2075471698,
+      "displacement_pixels": 249.8024219258092,
+      "path_length_pixels": 523.9621309226598
+    }
+  },
+  "events": {
+    "1": [
+      {
+        "frame": 0,
+        "kind": "first_observation",
+        "inferred": false
+      },
+      {
+        "frame": 53,
+        "kind": "reported_loss",
+        "inferred": false
+      },
+      {
+        "frame": 52,
+        "kind": "last_observation",
+        "inferred": false
+      },
+      {
+        "frame": 53,
+        "kind": "observations_ended",
+        "inferred": true
+      }
+    ]
+  }
+}

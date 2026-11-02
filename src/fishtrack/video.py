@@ -1,18 +1,20 @@
 """Validated MP4 input and atomic annotated-video export."""
 
 import csv
+import json
 import logging
 import math
 import os
 import tempfile
 from collections.abc import Iterator
 from contextlib import ExitStack
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import cv2
 
-from fishtrack.control import ProcessingHooks
+from fishtrack.analysis import TrackingRun, capture_cv, result_path, save_run, source_fingerprint
+from fishtrack.control import ProcessingCancelled, ProcessingHooks
 from fishtrack.detection import DetectionConfig, Image, MotionDetector
 from fishtrack.rendering import annotate
 from fishtrack.selection import select_regions
@@ -174,6 +176,9 @@ def process_video(
     if not output_path.parent.is_dir():
         raise ValueError("Output parent directory must exist")
 
+    if result_path(output_path).exists():
+        raise ValueError("Tracking results already exist for this output")
+
     # Create a new diagnostics directory rather than mixing results with an earlier run.
     if debug_dir is not None:
         debug_dir = debug_dir.resolve()
@@ -221,18 +226,49 @@ def process_video(
         if not writer.isOpened():
             raise OSError("Cannot initialise MP4 encoder (mp4v)")
 
+        configuration = {"processing": asdict(options), "detection": asdict(detection)}
+        # Paths are provenance strings rather than platform-specific JSON objects.
+        configuration = json.loads(json.dumps(configuration, default=str))
+        run = TrackingRun(
+            str(input_path),
+            source_fingerprint(input_path),
+            metadata.width,
+            metadata.height,
+            metadata.fps,
+            metadata.frame_count,
+            start_frame,
+            options.backend,
+            configuration,
+        )
+
+        # Persist incomplete data even if validation/encoding/cancellation fails after tracking.
+        stack.callback(_save_partial_run, run, result_path(output_path))
+
         # Share clip boundaries and cancellation handling between both tracking backends.
         frames = iter_clip(capture, metadata, start_frame, options, control)
-        if options.backend == "sam2":
-            from fishtrack.sam2_backend import process_sam2_frames
+        try:
+            if options.backend == "sam2":
+                from fishtrack.sam2_backend import process_sam2_frames
 
-            count = process_sam2_frames(
-                frames, writer, metadata, start_frame, options, debug_dir, control
-            )
-        else:
-            count = _process_conventional(
-                frames, writer, start_frame, metadata, detection, options, debug_dir, stack, control
-            )
+                count = process_sam2_frames(
+                    frames, writer, metadata, start_frame, options, debug_dir, control, run
+                )
+            else:
+                count = _process_conventional(
+                    frames,
+                    writer,
+                    start_frame,
+                    metadata,
+                    detection,
+                    options,
+                    debug_dir,
+                    stack,
+                    control,
+                    run,
+                )
+        except (Exception, KeyboardInterrupt) as error:
+            run.completion = "cancelled" if isinstance(error, ProcessingCancelled) else "failed"
+            raise
 
         # Finalize the MP4 container before attempting to decode the temporary export.
         writer.release()
@@ -248,10 +284,34 @@ def process_video(
             verification.release()
 
         # Hard-link creation refuses concurrent replacement of an existing output.
-        control.check()
+        try:
+            control.check()
+        except ProcessingCancelled:
+            run.completion = "cancelled"
+            raise
+        # Publish both outputs together; roll back our video if sidecar publication fails.
         os.link(temporary_path, output_path)
+        try:
+            run.completion = "complete"
+            save_run(run, result_path(output_path))
+        except (OSError, ValueError):
+            run.completion = "failed"
+            output_path.unlink()
+            raise
         LOGGER.info("Exported %d frames to %s (video only; audio is omitted)", count, output_path)
         return count
+
+
+def _save_partial_run(run: TrackingRun, path: Path) -> None:
+    """Preserve available reports on unsuccessful exits without masking the original error."""
+    if run.completion == "complete":
+        return
+    if run.completion == "incomplete":
+        run.completion = "failed"
+    try:
+        save_run(run, path)
+    except (OSError, ValueError):
+        LOGGER.exception("Could not save partial tracking results to %s", path)
 
 
 def _process_conventional(
@@ -264,6 +324,7 @@ def _process_conventional(
     debug_dir: Path | None,
     stack: ExitStack,
     control: ProcessingHooks,
+    run: TrackingRun,
 ) -> int:
     """Run the conventional detector and visual tracker over a validated frame iterator."""
     statistics = None
@@ -299,6 +360,7 @@ def _process_conventional(
     for count, frame in frames:
         if count == 0:
             selected_rois = prepare_initial_frame(frame, options, debug_dir, control)
+            run.configuration["selected_rois"] = selected_rois
         detections, mask, aligned, matrix, reliable = detector.update(
             frame, detect=not manual_selection or options.detect_additional
         )
@@ -315,6 +377,7 @@ def _process_conventional(
             if selected_rois:
                 tracker.seed(frame, selected_rois)
                 tracks = tracker.tracks
+        capture_cv(run, start_frame + count, tracks)
         rendered = annotate(
             frame,
             tracks,

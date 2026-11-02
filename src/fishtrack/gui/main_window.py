@@ -134,6 +134,9 @@ class MainWindow(QMainWindow):
         subtitle.setWordWrap(True)
         heading.addWidget(subtitle)
         header.addLayout(heading, 1)
+        analysis_button = QPushButton("Analysis")
+        analysis_button.clicked.connect(self.open_analysis)
+        header.addWidget(analysis_button)
         left_layout.addLayout(header)
         self.folder_label = QLabel()
         self.folder_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
@@ -237,6 +240,19 @@ class MainWindow(QMainWindow):
         splitter.setStretchFactor(0, 3)
         splitter.setStretchFactor(1, 2)
         splitter.setSizes([730, 450])
+
+    def open_analysis(self) -> None:
+        """Open saved-run analysis, initially showing the most recent processing result."""
+        from fishtrack.analysis import load_run, result_path
+        from fishtrack.gui.analysis import AnalysisDialog
+
+        dialog = AnalysisDialog(self)
+        if self.last_output is not None and result_path(self.last_output).is_file():
+            try:
+                dialog.set_run(0, load_run(result_path(self.last_output)))
+            except (OSError, ValueError) as error:
+                QMessageBox.warning(self, "Cannot open results", str(error))
+        dialog.exec()
 
     def selected_source(self) -> Path | None:
         """Resolve table selection by stored path identity, even after sorting or refresh."""

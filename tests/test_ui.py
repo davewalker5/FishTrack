@@ -435,3 +435,188 @@ def test_output_name_identifies_acquisition_and_tracker(tmp_path, backend, selec
     options = replace(default_options(), backend=backend, selection=selection)
     assert output_path(source, options).name == expected
     assert output_path(source, replace(options, output_name="custom.mp4")).name == "custom.mp4"
+
+
+def test_analysis_pairing_timeline_and_rendering(application, tmp_path):
+    """Saved runs work without videos, explicit pairing draws both paths and rejects mismatch."""
+    from fishtrack.analysis import Observation, TrackingRun
+    from fishtrack.gui.analysis import AnalysisDialog
+
+    run = TrackingRun(
+        "missing.mp4",
+        "same-source",
+        240,
+        180,
+        12,
+        8,
+        2,
+        "conventional",
+        {},
+        processed_frames=4,
+        completion="complete",
+    )
+    run.observations = [
+        Observation(2, 2 / 12, 1, "observed", 10, 10),
+        Observation(3, 3 / 12, 1, "lost"),
+        Observation(4, 4 / 12, 1, "observed", 40, 30),
+        Observation(5, 5 / 12, 1, "observed", 45, 35),
+    ]
+    second = replace(run, backend="sam2", run_id="second")
+    second.observations = [replace(item, track_id=7) for item in run.observations]
+    dialog = AnalysisDialog()
+    dialog.set_run(0, run)
+    dialog.set_run(1, second)
+    dialog.show()
+    application.processEvents()
+    assert dialog.selectors[0].currentData() == 1
+    assert dialog.selectors[1].currentData() == 7
+    assert [len(plot.selected) for plot in dialog.plots] == [1, 1]
+    assert len(dialog.continuity.selected) == 2
+    assert "coverage: 0.75" in dialog.details.toPlainText()
+    dialog.timeline.setValue(3)
+    assert "lost" in dialog.frame_label.text()
+    assert not dialog.plot.grab().isNull()
+    with pytest.raises(ValueError, match="fingerprint"):
+        dialog.set_run(1, replace(second, fingerprint="different-source"))
+    assert dialog.runs[1] is second
+    dialog.close()
+
+
+def test_processing_sidecar_and_cancelled_results(application, tmp_path):
+    """Normal processing emits canonical results; cancellation preserves marked partial reports."""
+    from fishtrack.analysis import load_run, result_path
+
+    source = tmp_path / "source.mp4"
+    source_video(source)
+    destination = tmp_path / "result.mp4"
+    options = ProcessingConfig(start=2 / 12, max_frames=4, rois=((40, 50, 30, 35),))
+    assert process_video(source, destination, DetectionConfig(), options) == 4
+    run = load_run(result_path(destination))
+    assert run.completion == "complete"
+    assert run.processed_frames == 4
+    assert run.observations[0].frame == 2
+    assert run.observations[0].timestamp == pytest.approx(2 / 12)
+    assert run.configuration["selected_rois"] == [[40, 50, 30, 35]]
+    cancelled_output = tmp_path / "cancelled.mp4"
+    cancel = False
+
+    def progress(completed, total, stage):
+        """Cancel deterministically once the first frame has been captured."""
+        nonlocal cancel
+        cancel = completed >= 1
+
+    hooks = ProcessingHooks(cancelled=lambda: cancel, progress=progress)
+    with pytest.raises(ProcessingCancelled):
+        process_video(source, cancelled_output, DetectionConfig(), options, hooks=hooks)
+    assert not cancelled_output.exists()
+    partial = load_run(result_path(cancelled_output))
+    assert partial.completion == "cancelled"
+    assert partial.processed_frames == 1
+
+
+def test_output_naming_skips_partial_sidecars(tmp_path):
+    """Retrying a cancelled run selects a new name even when no MP4 was published."""
+    from fishtrack.analysis import result_path
+
+    source = tmp_path / "source.mp4"
+    source.touch()
+    options = default_options()
+    first = output_path(source, options)
+    result_path(first).write_text("partial results")
+    assert output_path(source, options) != first
+
+
+def test_analysis_shared_video_playback(application, tmp_path):
+    """Either play control advances identical source images, cursors and gaps in both panels."""
+    from fishtrack.analysis import Observation, TrackingRun, source_fingerprint
+    from fishtrack.gui.analysis import AnalysisDialog, observed_intervals
+
+    source = tmp_path / "source.mp4"
+    source_video(source)
+    run = TrackingRun(
+        str(source),
+        source_fingerprint(source),
+        240,
+        180,
+        12,
+        8,
+        2,
+        "conventional",
+        {},
+        processed_frames=4,
+        completion="complete",
+    )
+    run.observations = [
+        Observation(2, 2 / 12, 1, "observed", 40, 60),
+        Observation(3, 3 / 12, 1, "lost"),
+        Observation(4, 4 / 12, 1, "observed", 44, 60),
+        Observation(5, 5 / 12, 1, "observed", 45, 60),
+    ]
+    assert observed_intervals(run, 1) == [(2, 3), (4, 6)]
+    dialog = AnalysisDialog()
+    dialog.set_run(0, run)
+    dialog.set_run(1, replace(run, backend="sam2", run_id="second"))
+    assert not any(button.isEnabled() for button in dialog.play_buttons)
+    dialog.show()
+    application.processEvents()
+    dialog.set_source(source)
+    assert all(button.isEnabled() for button in dialog.play_buttons)
+    assert not dialog.plots[0].image.isNull()
+    assert dialog.plots[0].image == dialog.plots[1].image
+    first_image = dialog.plots[0].image.copy()
+    dialog.play_buttons[1].click()
+    assert dialog.timer.isActive()
+    assert all(button.text() == "Pause" for button in dialog.play_buttons)
+    dialog.advance_frame()
+    assert dialog.timeline.value() == 3
+    assert all(plot.frame == 3 for plot in dialog.plots)
+    assert dialog.continuity.frame == 3
+    assert "lost" in dialog.panel_status[0].text()
+    assert dialog.plots[0].image == dialog.plots[1].image
+    assert dialog.plots[0].image != first_image
+    dialog.play_buttons[0].click()
+    assert not dialog.timer.isActive()
+    dialog.timeline.setValue(5)
+    dialog.play_buttons[0].click()
+    assert dialog.timeline.value() == 2
+    for _ in range(3):
+        dialog.advance_frame()
+    assert dialog.timeline.value() == 5
+    assert not dialog.timer.isActive()
+    dialog.close()
+    assert dialog.capture is None
+
+
+def test_analysis_source_mismatch_preserves_loaded_video(application, tmp_path):
+    """A wrong video cannot replace the synchronized source or leave decoders running."""
+    from fishtrack.analysis import TrackingRun, source_fingerprint
+    from fishtrack.gui.analysis import AnalysisDialog
+
+    source = tmp_path / "source.mp4"
+    source_video(source)
+    run = TrackingRun(
+        str(source),
+        source_fingerprint(source),
+        240,
+        180,
+        12,
+        8,
+        0,
+        "conventional",
+        {},
+        processed_frames=8,
+        completion="complete",
+    )
+    dialog = AnalysisDialog()
+    dialog.set_run(0, run)
+    dialog.show()
+    application.processEvents()
+    dialog.set_source(source)
+    wrong = tmp_path / "wrong.mp4"
+    wrong.write_bytes(b"wrong source")
+    with pytest.raises(ValueError, match="fingerprint"):
+        dialog.set_source(wrong)
+    assert dialog.source == source
+    assert dialog.capture.isOpened()
+    dialog.close()
+    assert dialog.capture is None
