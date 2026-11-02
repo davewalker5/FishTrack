@@ -65,5 +65,5 @@ done < <(find . \( -name .git -o -name venv -o -name .venv -o -name .runtime \
 if "$dry_run"; then
     echo "Preview complete; no files removed."
 else
-    echo "Cleanup complete. Run ./scripts/make-venv.sh to prepare FishTrack again."
+    echo "Cleanup complete"
 fi
