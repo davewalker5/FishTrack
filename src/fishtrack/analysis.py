@@ -86,13 +86,17 @@ def source_fingerprint(path: Path) -> str:
     :param path: Source file to identify independently of its name or location.
     :return: Versioned sampled SHA-256 fingerprint (not a full-file integrity hash).
     """
+
+    # Sampling keeps source identification inexpensive even for multi-gigabyte videos.
     size = path.stat().st_size
     digest = hashlib.sha256(str(size).encode("ascii"))
     block = 1024 * 1024
     with path.open("rb") as handle:
+        # Deduplicate offsets so short files are not hashed repeatedly at the same position.
         for offset in sorted({0, max(0, size // 2 - block // 2), max(0, size - block)}):
             handle.seek(offset)
             digest.update(handle.read(block))
+
     return "sampled-sha256-v1:" + digest.hexdigest()
 
 
@@ -103,6 +107,8 @@ def capture_cv(run: TrackingRun, frame: int, tracks: list[Track]) -> None:
     :param frame: Canonical source frame.
     :param tracks: Native CV identities; positions are their reported centroids.
     """
+
+    # Retained lost identities may contain predictions, which are not observed positions.
     for track in tracks:
         visible = track.missing == 0
         run.observations.append(
@@ -116,11 +122,15 @@ def capture_cv(run: TrackingRun, frame: int, tracks: list[Track]) -> None:
                 tuple(float(value) for value in track.detection.box) if visible else None,
             )
         )
+
+    # Count processed source frames even when this frame contains no object reports.
     run.processed_frames = frame - run.start_frame + 1
 
 
 def capture_sam2(run: TrackingRun, frame: int, reports: list[MaskObservation]) -> None:
     """Adapt mask reports using the mask bounding-box centre, not a fabricated centroid."""
+
+    # A bounding-box centre is available without retaining the full segmentation mask.
     for report in reports:
         box = report.box
         run.observations.append(
@@ -135,6 +145,8 @@ def capture_sam2(run: TrackingRun, frame: int, reports: list[MaskObservation]) -
                 report.pixels,
             )
         )
+
+    # Count processed source frames even when this frame contains no object reports.
     run.processed_frames = frame - run.start_frame + 1
 
 
@@ -156,10 +168,12 @@ def track_events(
         or area_ratio_threshold <= 1
     ):
         raise ValueError("Discontinuity thresholds must be positive; area ratio must exceed one")
+
     events = []
     previous = None
     lost = False
     for item in run.track(track_id):
+        # Collapse consecutive absent reports into one loss event until a position returns.
         if item.x is None:
             if not lost:
                 events.append(TrackEvent(item.frame, "reported_loss"))
@@ -168,23 +182,33 @@ def track_events(
         if previous is None:
             events.append(TrackEvent(item.frame, "first_observation"))
         else:
+            # Compare source indices so absent reports and omitted frames both reveal gaps.
             gap = item.frame - previous.frame > run.frame_step
             if gap:
                 events.append(TrackEvent(previous.frame + run.frame_step, "missing_observations"))
             if lost or gap:
                 events.append(TrackEvent(item.frame, "reacquired"))
+
+            # Movement through an unobserved interval is unknown, not a measured jump.
             if not gap:
                 if math.hypot(item.x - previous.x, item.y - previous.y) > position_threshold:
                     events.append(TrackEvent(item.frame, "possible_position_jump", True))
                 if item.box and previous.box:
                     ratio = item.box[2] * item.box[3] / (previous.box[2] * previous.box[3])
+
+                    # Treat proportional growth and shrinkage symmetrically.
                     if max(ratio, 1 / ratio) > area_ratio_threshold:
                         events.append(TrackEvent(item.frame, "possible_area_jump", True))
+    
         previous, lost = item, False
+
     if previous is not None:
         events.append(TrackEvent(previous.frame, "last_observation"))
+
+        # An early endpoint is inferred from missing reports, not proof of tracker failure.
         if previous.frame < run.start_frame + run.processed_frames - 1:
             events.append(TrackEvent(previous.frame + run.frame_step, "observations_ended", True))
+
     return events
 
 
@@ -193,6 +217,8 @@ def track_statistics(run: TrackingRun, track_id: int) -> dict[str, float | int |
 
     :return: Frames, seconds, coverage fraction, pixel distances and square-pixel areas.
     """
+
+    # Missing positions must not inflate coverage or contribute stale coordinates to distances.
     items = [item for item in run.track(track_id) if item.x is not None]
     if not items:
         return {
@@ -208,6 +234,8 @@ def track_statistics(run: TrackingRun, track_id: int) -> dict[str, float | int |
             "displacement_pixels": None,
             "path_length_pixels": 0,
         }
+
+    # Coverage includes both endpoint frames; elapsed time remains their timestamp difference.
     first, last = items[0], items[-1]
     pairs = list(zip(items, items[1:]))
     areas = [item.box[2] * item.box[3] for item in items if item.box]
@@ -239,6 +267,7 @@ def validate_run(run: TrackingRun) -> None:
         run.schema_version != SCHEMA_VERSION or run.coordinates != COORDINATES
     ):
         raise ValueError("Unsupported tracking schema or coordinate system")
+
     integers = (
         run.width,
         run.height,
@@ -247,8 +276,11 @@ def validate_run(run: TrackingRun) -> None:
         run.processed_frames,
         run.frame_step,
     )
+
+    # Explicit type checks reject booleans, which Python otherwise accepts as integers.
     if any(type(value) is not int for value in integers):
         raise ValueError("Frame dimensions and timeline values must be integers")
+
     if (
         min(run.width, run.height, run.frame_step) <= 0
         or min(run.start_frame, run.source_frames, run.processed_frames) < 0
@@ -256,6 +288,7 @@ def validate_run(run: TrackingRun) -> None:
         or run.fps <= 0
     ):
         raise ValueError("Invalid source dimensions or timeline")
+
     if (
         run.backend not in {"conventional", "sam2"}
         or run.completion not in {"complete", "incomplete", "cancelled", "failed"}
@@ -266,6 +299,8 @@ def validate_run(run: TrackingRun) -> None:
         )
     ):
         raise ValueError("Invalid run metadata")
+
+    # Track ordering independently: reports from different identities may be interleaved.
     previous = {}
     for item in run.observations:
         if (
@@ -281,9 +316,13 @@ def validate_run(run: TrackingRun) -> None:
             or not math.isclose(item.timestamp, item.frame / run.fps, abs_tol=1e-8)
         ):
             raise ValueError("Invalid, duplicate or unordered observation timeline")
+
         previous[item.track_id] = item.frame
+
+        # A position is either fully available or fully absent; partial points are ambiguous.
         if (item.x is None) != (item.y is None):
             raise ValueError("Observation must contain both coordinates or neither")
+
         if item.x is not None and not (
             math.isfinite(item.x)
             and math.isfinite(item.y)
@@ -291,14 +330,18 @@ def validate_run(run: TrackingRun) -> None:
             and 0 <= item.y <= run.height
         ):
             raise ValueError("Observation position is outside the source frame")
+
         if item.box is not None:
             if len(item.box) != 4 or not all(math.isfinite(value) for value in item.box):
                 raise ValueError("Invalid bounding box")
+
             x, y, width, height = item.box
             if min(x, y) < 0 or min(width, height) <= 0:
                 raise ValueError("Invalid bounding-box dimensions")
+
             if x + width > run.width or y + height > run.height:
                 raise ValueError("Bounding box is outside the source frame")
+    
         if item.mask_area is not None and (
             type(item.mask_area) is not int or not 0 <= item.mask_area <= run.width * run.height
         ):
@@ -309,6 +352,8 @@ def validate_comparison(first: TrackingRun, second: TrackingRun) -> None:
     """Require matching sampled source identity and exact source-coordinate timelines."""
     validate_run(first)
     validate_run(second)
+
+    # Backend settings may differ, but source identity, geometry and timeline must agree.
     for name in (
         "fingerprint",
         "width",
@@ -321,6 +366,7 @@ def validate_comparison(first: TrackingRun, second: TrackingRun) -> None:
     ):
         if getattr(first, name) != getattr(second, name):
             raise ValueError(f"Cannot compare runs: {name.replace('_', ' ')} differs")
+
     if not math.isclose(first.fps, second.fps, rel_tol=1e-9):
         raise ValueError("Cannot compare runs: source frame rate differs")
 
@@ -328,18 +374,25 @@ def validate_comparison(first: TrackingRun, second: TrackingRun) -> None:
 def save_run(run: TrackingRun, path: Path) -> None:
     """Atomically publish new JSON, including reproducible derived metrics; refuse overwrite."""
     validate_run(run)
+
+    # Keep raw reports alongside derived metrics so later sessions can reproduce the analysis.
     payload = asdict(run)
     payload["statistics"] = {str(key): track_statistics(run, key) for key in run.track_ids}
     payload["events"] = {
         str(key): [asdict(event) for event in track_events(run, key)] for key in run.track_ids
     }
+
+    # Stage beside the destination so publication stays on the same filesystem.
     descriptor, name = tempfile.mkstemp(dir=path.parent, suffix=".json")
     temporary = Path(name)
     try:
         with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
             json.dump(payload, handle, indent=2, allow_nan=False)
             handle.write("\n")
+
+        # Exclusive hard-link creation publishes complete JSON without replacing an existing run.
         os.link(temporary, path)
+
     finally:
         temporary.unlink(missing_ok=True)
 
@@ -373,17 +426,24 @@ def load_run(path: Path) -> TrackingRun:
         }
         if not isinstance(data, dict) or not required.issubset(data):
             raise ValueError("Missing required tracking metadata")
+
+        # Derived values are recomputed from validated observations rather than trusted on load.
         data.pop("statistics", None)
         data.pop("events", None)
         reports = data.pop("observations")
         observations = []
         for item in reports:
             if item.get("box") is not None:
+                # Restore the internal immutable box representation from a JSON array.
                 item["box"] = tuple(item["box"])
+
             observations.append(Observation(**item))
+
         run = TrackingRun(**data, observations=observations)
         validate_run(run)
         return run
+
+    # Present malformed structures through one public error type while preserving I/O errors.
     except (ValueError, TypeError, KeyError, AttributeError, OverflowError) as error:
         raise ValueError(f"Invalid tracking results: {error}") from error
 
@@ -413,6 +473,8 @@ def export_csv(run: TrackingRun, path: Path) -> None:
                 "mask_area",
             ]
         )
+
+        # CSV writes None as empty fields, preserving the distinction between missing and zero.
         for item in run.observations:
             writer.writerow(
                 [
