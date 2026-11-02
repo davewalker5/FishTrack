@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING, Any
 import cv2
 import numpy as np
 
+from fishtrack.analysis import TrackingRun, capture_sam2
 from fishtrack.control import ProcessingHooks
 from fishtrack.detection import Image
 
@@ -102,7 +103,6 @@ def load_predictor(options: ProcessingConfig) -> tuple[Any, Any, str]:
     device = choose_device(torch, options.sam2_device)
     LOGGER.info("Loading SAM 2.1 %s on %s from %s", options.sam2_model, device, checkpoint)
     try:
-
         # CUDA-only hole filling is unnecessary for this portable CPU/MPS experiment.
         predictor = build_sam2_video_predictor(
             specification.config, str(checkpoint), device=device, apply_postprocessing=False
@@ -189,6 +189,7 @@ def process_sam2_frames(
     options: ProcessingConfig,
     debug_dir: Path | None,
     hooks: ProcessingHooks | None = None,
+    run: TrackingRun | None = None,
 ) -> int:
     """Segment a bounded selected clip, exporting original frames with fresh model outlines.
 
@@ -203,7 +204,6 @@ def process_sam2_frames(
     :raises ValueError: For invalid regions, empty clips or experiments above the frame bound.
     """
     from fishtrack.video import prepare_initial_frame
-
 
     # Use the same cancellation and progress callbacks for desktop and command-line runs.
     control = hooks or ProcessingHooks()
@@ -232,6 +232,8 @@ def process_sam2_frames(
             # Choose identities once on the first processed frame and validate their source bounds.
             if index == 0:
                 regions = prepare_initial_frame(frame, options, debug_dir, control)
+                if run is not None:
+                    run.configuration["selected_rois"] = regions
                 for x, y, width, height in regions:
                     if x + width > metadata.width or y + height > metadata.height:
                         raise ValueError("Selected SAM 2 ROI is outside the source frame")
@@ -302,6 +304,8 @@ def process_sam2_frames(
                     rendered, observations = annotate_masks(
                         original, list(object_ids), masks, options
                     )
+                    if run is not None:
+                        capture_sam2(run, start_frame + index, observations)
                     writer.write(rendered)
                     control.show(rendered)
                     control.report(index + 1, frame_count, "Tracking fish with SAM 2")

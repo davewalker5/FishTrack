@@ -1,0 +1,1898 @@
+{
+  "source": "/Users/dave/Temporary/FishTrack/OC-V-26-007-stabilised-trimmed.mp4",
+  "fingerprint": "sampled-sha256-v1:d8287b0a45466ea88a90780d7e8073b89bdb097bb00dff9aaed582612943375a",
+  "width": 1920,
+  "height": 1080,
+  "fps": 23.976023976023978,
+  "source_frames": 186,
+  "start_frame": 0,
+  "backend": "sam2",
+  "configuration": {
+    "processing": {
+      "start": 0.0,
+      "duration": 5.0,
+      "max_frames": 240,
+      "max_distance": 60.0,
+      "max_missing": 5,
+      "min_hits": 3,
+      "outline": true,
+      "track_ids": true,
+      "bounding_boxes": false,
+      "rois": [],
+      "detect_additional": false,
+      "appearance": true,
+      "tracking_threshold": 0.035,
+      "save_start_frame": null,
+      "select_roi": true,
+      "backend": "sam2",
+      "sam2_checkpoint": "/Users/dave/Workbench/Development/Projects/FishTrack/models/sam2.1_hiera_tiny.pt",
+      "sam2_model": "tiny",
+      "sam2_device": "cpu",
+      "sam2_min_area": 40,
+      "auto_roi": false,
+      "accept_auto_roi": false,
+      "grounding_model": "/Users/dave/Workbench/Development/Projects/FishTrack/models/grounding-dino-tiny",
+      "grounding_prompt": "fish.",
+      "grounding_threshold": 0.3,
+      "grounding_text_threshold": 0.25,
+      "grounding_device": "cpu",
+      "max_auto_rois": 10
+    },
+    "detection": {
+      "motion_threshold": 25.0,
+      "min_area": 80.0,
+      "max_area": 50000.0,
+      "max_aspect_ratio": 8,
+      "compensate": true,
+      "local_motion": true,
+      "min_residual_motion": 2.0,
+      "suppress_unreliable": true
+    },
+    "selected_rois": [
+      [
+        529,
+        216,
+        370,
+        306
+      ]
+    ]
+  },
+  "run_id": "14250d0f-c556-40aa-96e6-d90d992b11ed",
+  "schema_version": 1,
+  "application_version": "1.1.0",
+  "coordinates": "source_pixels_top_left",
+  "frame_step": 1,
+  "processed_frames": 120,
+  "completion": "complete",
+  "observations": [
+    {
+      "frame": 0,
+      "timestamp": 0.0,
+      "track_id": 1,
+      "status": "visible",
+      "x": 719.0,
+      "y": 369.5,
+      "box": [
+        548.0,
+        224.0,
+        342.0,
+        291.0
+      ],
+      "mask_area": 37338
+    },
+    {
+      "frame": 1,
+      "timestamp": 0.04170833333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 722.5,
+      "y": 374.0,
+      "box": [
+        550.0,
+        229.0,
+        345.0,
+        290.0
+      ],
+      "mask_area": 37057
+    },
+    {
+      "frame": 2,
+      "timestamp": 0.08341666666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 729.0,
+      "y": 379.0,
+      "box": [
+        556.0,
+        233.0,
+        346.0,
+        292.0
+      ],
+      "mask_area": 38140
+    },
+    {
+      "frame": 3,
+      "timestamp": 0.125125,
+      "track_id": 1,
+      "status": "visible",
+      "x": 735.0,
+      "y": 384.0,
+      "box": [
+        561.0,
+        237.0,
+        348.0,
+        294.0
+      ],
+      "mask_area": 38610
+    },
+    {
+      "frame": 4,
+      "timestamp": 0.16683333333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 741.5,
+      "y": 388.0,
+      "box": [
+        567.0,
+        240.0,
+        349.0,
+        296.0
+      ],
+      "mask_area": 39187
+    },
+    {
+      "frame": 5,
+      "timestamp": 0.20854166666666665,
+      "track_id": 1,
+      "status": "visible",
+      "x": 750.0,
+      "y": 392.5,
+      "box": [
+        575.0,
+        244.0,
+        350.0,
+        297.0
+      ],
+      "mask_area": 39711
+    },
+    {
+      "frame": 6,
+      "timestamp": 0.25025,
+      "track_id": 1,
+      "status": "visible",
+      "x": 759.0,
+      "y": 396.5,
+      "box": [
+        585.0,
+        247.0,
+        348.0,
+        299.0
+      ],
+      "mask_area": 40121
+    },
+    {
+      "frame": 7,
+      "timestamp": 0.2919583333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 767.5,
+      "y": 398.5,
+      "box": [
+        594.0,
+        248.0,
+        347.0,
+        301.0
+      ],
+      "mask_area": 40926
+    },
+    {
+      "frame": 8,
+      "timestamp": 0.33366666666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 776.5,
+      "y": 402.0,
+      "box": [
+        605.0,
+        252.0,
+        343.0,
+        300.0
+      ],
+      "mask_area": 41060
+    },
+    {
+      "frame": 9,
+      "timestamp": 0.37537499999999996,
+      "track_id": 1,
+      "status": "visible",
+      "x": 784.5,
+      "y": 404.0,
+      "box": [
+        613.0,
+        254.0,
+        343.0,
+        300.0
+      ],
+      "mask_area": 41330
+    },
+    {
+      "frame": 10,
+      "timestamp": 0.4170833333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 789.0,
+      "y": 406.0,
+      "box": [
+        615.0,
+        256.0,
+        348.0,
+        300.0
+      ],
+      "mask_area": 42090
+    },
+    {
+      "frame": 11,
+      "timestamp": 0.45879166666666665,
+      "track_id": 1,
+      "status": "visible",
+      "x": 793.0,
+      "y": 408.0,
+      "box": [
+        617.0,
+        260.0,
+        352.0,
+        296.0
+      ],
+      "mask_area": 42477
+    },
+    {
+      "frame": 12,
+      "timestamp": 0.5005,
+      "track_id": 1,
+      "status": "visible",
+      "x": 796.5,
+      "y": 410.5,
+      "box": [
+        618.0,
+        265.0,
+        357.0,
+        291.0
+      ],
+      "mask_area": 42771
+    },
+    {
+      "frame": 13,
+      "timestamp": 0.5422083333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 800.0,
+      "y": 412.0,
+      "box": [
+        619.0,
+        267.0,
+        362.0,
+        290.0
+      ],
+      "mask_area": 42913
+    },
+    {
+      "frame": 14,
+      "timestamp": 0.5839166666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 801.0,
+      "y": 412.5,
+      "box": [
+        617.0,
+        270.0,
+        368.0,
+        285.0
+      ],
+      "mask_area": 42065
+    },
+    {
+      "frame": 15,
+      "timestamp": 0.625625,
+      "track_id": 1,
+      "status": "visible",
+      "x": 804.0,
+      "y": 414.0,
+      "box": [
+        618.0,
+        273.0,
+        372.0,
+        282.0
+      ],
+      "mask_area": 41120
+    },
+    {
+      "frame": 16,
+      "timestamp": 0.6673333333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 806.5,
+      "y": 414.0,
+      "box": [
+        619.0,
+        276.0,
+        375.0,
+        276.0
+      ],
+      "mask_area": 39771
+    },
+    {
+      "frame": 17,
+      "timestamp": 0.7090416666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 808.0,
+      "y": 414.5,
+      "box": [
+        617.0,
+        279.0,
+        382.0,
+        271.0
+      ],
+      "mask_area": 38727
+    },
+    {
+      "frame": 18,
+      "timestamp": 0.7507499999999999,
+      "track_id": 1,
+      "status": "visible",
+      "x": 808.0,
+      "y": 415.0,
+      "box": [
+        613.0,
+        283.0,
+        390.0,
+        264.0
+      ],
+      "mask_area": 37847
+    },
+    {
+      "frame": 19,
+      "timestamp": 0.7924583333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 808.5,
+      "y": 417.5,
+      "box": [
+        611.0,
+        289.0,
+        395.0,
+        257.0
+      ],
+      "mask_area": 38237
+    },
+    {
+      "frame": 20,
+      "timestamp": 0.8341666666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 808.5,
+      "y": 421.5,
+      "box": [
+        610.0,
+        298.0,
+        397.0,
+        247.0
+      ],
+      "mask_area": 37533
+    },
+    {
+      "frame": 21,
+      "timestamp": 0.875875,
+      "track_id": 1,
+      "status": "visible",
+      "x": 807.5,
+      "y": 430.5,
+      "box": [
+        607.0,
+        312.0,
+        401.0,
+        237.0
+      ],
+      "mask_area": 36162
+    },
+    {
+      "frame": 22,
+      "timestamp": 0.9175833333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 810.5,
+      "y": 432.5,
+      "box": [
+        611.0,
+        317.0,
+        399.0,
+        231.0
+      ],
+      "mask_area": 34637
+    },
+    {
+      "frame": 23,
+      "timestamp": 0.9592916666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 811.5,
+      "y": 434.5,
+      "box": [
+        615.0,
+        321.0,
+        393.0,
+        227.0
+      ],
+      "mask_area": 34901
+    },
+    {
+      "frame": 24,
+      "timestamp": 1.001,
+      "track_id": 1,
+      "status": "visible",
+      "x": 808.0,
+      "y": 426.5,
+      "box": [
+        612.0,
+        306.0,
+        392.0,
+        241.0
+      ],
+      "mask_area": 35564
+    },
+    {
+      "frame": 25,
+      "timestamp": 1.0427083333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 806.0,
+      "y": 423.5,
+      "box": [
+        613.0,
+        300.0,
+        386.0,
+        247.0
+      ],
+      "mask_area": 36928
+    },
+    {
+      "frame": 26,
+      "timestamp": 1.0844166666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 806.5,
+      "y": 420.0,
+      "box": [
+        617.0,
+        292.0,
+        379.0,
+        256.0
+      ],
+      "mask_area": 38509
+    },
+    {
+      "frame": 27,
+      "timestamp": 1.1261249999999998,
+      "track_id": 1,
+      "status": "visible",
+      "x": 804.5,
+      "y": 407.5,
+      "box": [
+        616.0,
+        264.0,
+        377.0,
+        287.0
+      ],
+      "mask_area": 40221
+    },
+    {
+      "frame": 28,
+      "timestamp": 1.1678333333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 800.0,
+      "y": 393.0,
+      "box": [
+        612.0,
+        233.0,
+        376.0,
+        320.0
+      ],
+      "mask_area": 41531
+    },
+    {
+      "frame": 29,
+      "timestamp": 1.2095416666666665,
+      "track_id": 1,
+      "status": "visible",
+      "x": 820.0,
+      "y": 381.0,
+      "box": [
+        656.0,
+        208.0,
+        328.0,
+        346.0
+      ],
+      "mask_area": 37597
+    },
+    {
+      "frame": 30,
+      "timestamp": 1.25125,
+      "track_id": 1,
+      "status": "visible",
+      "x": 827.5,
+      "y": 378.5,
+      "box": [
+        674.0,
+        198.0,
+        307.0,
+        361.0
+      ],
+      "mask_area": 35085
+    },
+    {
+      "frame": 31,
+      "timestamp": 1.2929583333333332,
+      "track_id": 1,
+      "status": "visible",
+      "x": 835.0,
+      "y": 382.5,
+      "box": [
+        690.0,
+        204.0,
+        290.0,
+        357.0
+      ],
+      "mask_area": 31786
+    },
+    {
+      "frame": 32,
+      "timestamp": 1.3346666666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 827.0,
+      "y": 393.0,
+      "box": [
+        672.0,
+        226.0,
+        310.0,
+        334.0
+      ],
+      "mask_area": 30990
+    },
+    {
+      "frame": 33,
+      "timestamp": 1.376375,
+      "track_id": 1,
+      "status": "visible",
+      "x": 816.0,
+      "y": 412.0,
+      "box": [
+        652.0,
+        256.0,
+        328.0,
+        312.0
+      ],
+      "mask_area": 31053
+    },
+    {
+      "frame": 34,
+      "timestamp": 1.4180833333333331,
+      "track_id": 1,
+      "status": "visible",
+      "x": 814.5,
+      "y": 427.0,
+      "box": [
+        648.0,
+        282.0,
+        333.0,
+        290.0
+      ],
+      "mask_area": 34171
+    },
+    {
+      "frame": 35,
+      "timestamp": 1.4597916666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 819.5,
+      "y": 432.5,
+      "box": [
+        656.0,
+        289.0,
+        327.0,
+        287.0
+      ],
+      "mask_area": 35882
+    },
+    {
+      "frame": 36,
+      "timestamp": 1.5014999999999998,
+      "track_id": 1,
+      "status": "visible",
+      "x": 830.0,
+      "y": 409.0,
+      "box": [
+        676.0,
+        238.0,
+        308.0,
+        342.0
+      ],
+      "mask_area": 39762
+    },
+    {
+      "frame": 37,
+      "timestamp": 1.5432083333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 838.5,
+      "y": 391.0,
+      "box": [
+        694.0,
+        197.0,
+        289.0,
+        388.0
+      ],
+      "mask_area": 44314
+    },
+    {
+      "frame": 38,
+      "timestamp": 1.5849166666666665,
+      "track_id": 1,
+      "status": "visible",
+      "x": 852.0,
+      "y": 384.5,
+      "box": [
+        716.0,
+        177.0,
+        272.0,
+        415.0
+      ],
+      "mask_area": 47175
+    },
+    {
+      "frame": 39,
+      "timestamp": 1.626625,
+      "track_id": 1,
+      "status": "visible",
+      "x": 865.5,
+      "y": 392.5,
+      "box": [
+        737.0,
+        189.0,
+        257.0,
+        407.0
+      ],
+      "mask_area": 46390
+    },
+    {
+      "frame": 40,
+      "timestamp": 1.6683333333333332,
+      "track_id": 1,
+      "status": "visible",
+      "x": 878.0,
+      "y": 404.0,
+      "box": [
+        753.0,
+        211.0,
+        250.0,
+        386.0
+      ],
+      "mask_area": 44522
+    },
+    {
+      "frame": 41,
+      "timestamp": 1.7100416666666665,
+      "track_id": 1,
+      "status": "visible",
+      "x": 885.0,
+      "y": 423.0,
+      "box": [
+        759.0,
+        245.0,
+        252.0,
+        356.0
+      ],
+      "mask_area": 42478
+    },
+    {
+      "frame": 42,
+      "timestamp": 1.75175,
+      "track_id": 1,
+      "status": "visible",
+      "x": 903.5,
+      "y": 439.0,
+      "box": [
+        771.0,
+        276.0,
+        265.0,
+        326.0
+      ],
+      "mask_area": 42433
+    },
+    {
+      "frame": 43,
+      "timestamp": 1.7934583333333332,
+      "track_id": 1,
+      "status": "visible",
+      "x": 916.5,
+      "y": 449.0,
+      "box": [
+        790.0,
+        296.0,
+        253.0,
+        306.0
+      ],
+      "mask_area": 44074
+    },
+    {
+      "frame": 44,
+      "timestamp": 1.8351666666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 928.5,
+      "y": 453.0,
+      "box": [
+        811.0,
+        305.0,
+        235.0,
+        296.0
+      ],
+      "mask_area": 45392
+    },
+    {
+      "frame": 45,
+      "timestamp": 1.8768749999999998,
+      "track_id": 1,
+      "status": "visible",
+      "x": 952.0,
+      "y": 449.5,
+      "box": [
+        842.0,
+        297.0,
+        220.0,
+        305.0
+      ],
+      "mask_area": 49104
+    },
+    {
+      "frame": 46,
+      "timestamp": 1.9185833333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 974.5,
+      "y": 435.0,
+      "box": [
+        862.0,
+        268.0,
+        225.0,
+        334.0
+      ],
+      "mask_area": 53352
+    },
+    {
+      "frame": 47,
+      "timestamp": 1.9602916666666665,
+      "track_id": 1,
+      "status": "visible",
+      "x": 992.0,
+      "y": 431.0,
+      "box": [
+        874.0,
+        261.0,
+        236.0,
+        340.0
+      ],
+      "mask_area": 57841
+    },
+    {
+      "frame": 48,
+      "timestamp": 2.002,
+      "track_id": 1,
+      "status": "visible",
+      "x": 994.5,
+      "y": 434.0,
+      "box": [
+        873.0,
+        267.0,
+        243.0,
+        334.0
+      ],
+      "mask_area": 58746
+    },
+    {
+      "frame": 49,
+      "timestamp": 2.043708333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 991.0,
+      "y": 449.5,
+      "box": [
+        868.0,
+        295.0,
+        246.0,
+        309.0
+      ],
+      "mask_area": 52576
+    },
+    {
+      "frame": 50,
+      "timestamp": 2.0854166666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 994.0,
+      "y": 456.5,
+      "box": [
+        863.0,
+        307.0,
+        262.0,
+        299.0
+      ],
+      "mask_area": 51446
+    },
+    {
+      "frame": 51,
+      "timestamp": 2.127125,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1003.0,
+      "y": 459.0,
+      "box": [
+        871.0,
+        315.0,
+        264.0,
+        288.0
+      ],
+      "mask_area": 51645
+    },
+    {
+      "frame": 52,
+      "timestamp": 2.168833333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1013.5,
+      "y": 468.0,
+      "box": [
+        883.0,
+        335.0,
+        261.0,
+        266.0
+      ],
+      "mask_area": 52389
+    },
+    {
+      "frame": 53,
+      "timestamp": 2.2105416666666664,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1017.0,
+      "y": 464.5,
+      "box": [
+        883.0,
+        329.0,
+        268.0,
+        271.0
+      ],
+      "mask_area": 53510
+    },
+    {
+      "frame": 54,
+      "timestamp": 2.2522499999999996,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1027.0,
+      "y": 454.0,
+      "box": [
+        890.0,
+        306.0,
+        274.0,
+        296.0
+      ],
+      "mask_area": 56231
+    },
+    {
+      "frame": 55,
+      "timestamp": 2.2939583333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1033.5,
+      "y": 446.5,
+      "box": [
+        895.0,
+        291.0,
+        277.0,
+        311.0
+      ],
+      "mask_area": 55356
+    },
+    {
+      "frame": 56,
+      "timestamp": 2.3356666666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1036.5,
+      "y": 439.5,
+      "box": [
+        899.0,
+        277.0,
+        275.0,
+        325.0
+      ],
+      "mask_area": 52446
+    },
+    {
+      "frame": 57,
+      "timestamp": 2.377375,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1037.5,
+      "y": 433.5,
+      "box": [
+        899.0,
+        265.0,
+        277.0,
+        337.0
+      ],
+      "mask_area": 50587
+    },
+    {
+      "frame": 58,
+      "timestamp": 2.419083333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1036.0,
+      "y": 428.0,
+      "box": [
+        897.0,
+        253.0,
+        278.0,
+        350.0
+      ],
+      "mask_area": 48226
+    },
+    {
+      "frame": 59,
+      "timestamp": 2.4607916666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1033.0,
+      "y": 423.5,
+      "box": [
+        895.0,
+        243.0,
+        276.0,
+        361.0
+      ],
+      "mask_area": 45095
+    },
+    {
+      "frame": 60,
+      "timestamp": 2.5025,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1029.5,
+      "y": 421.0,
+      "box": [
+        893.0,
+        237.0,
+        273.0,
+        368.0
+      ],
+      "mask_area": 41583
+    },
+    {
+      "frame": 61,
+      "timestamp": 2.544208333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1024.0,
+      "y": 420.0,
+      "box": [
+        890.0,
+        233.0,
+        268.0,
+        374.0
+      ],
+      "mask_area": 39024
+    },
+    {
+      "frame": 62,
+      "timestamp": 2.5859166666666664,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1020.0,
+      "y": 421.5,
+      "box": [
+        886.0,
+        229.0,
+        268.0,
+        385.0
+      ],
+      "mask_area": 37114
+    },
+    {
+      "frame": 63,
+      "timestamp": 2.6276249999999997,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1017.0,
+      "y": 424.5,
+      "box": [
+        882.0,
+        229.0,
+        270.0,
+        391.0
+      ],
+      "mask_area": 36427
+    },
+    {
+      "frame": 64,
+      "timestamp": 2.6693333333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1013.0,
+      "y": 427.5,
+      "box": [
+        875.0,
+        229.0,
+        276.0,
+        397.0
+      ],
+      "mask_area": 36289
+    },
+    {
+      "frame": 65,
+      "timestamp": 2.7110416666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1007.0,
+      "y": 431.5,
+      "box": [
+        864.0,
+        230.0,
+        286.0,
+        403.0
+      ],
+      "mask_area": 36804
+    },
+    {
+      "frame": 66,
+      "timestamp": 2.75275,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1003.5,
+      "y": 437.0,
+      "box": [
+        852.0,
+        235.0,
+        303.0,
+        404.0
+      ],
+      "mask_area": 37315
+    },
+    {
+      "frame": 67,
+      "timestamp": 2.794458333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1001.0,
+      "y": 441.0,
+      "box": [
+        841.0,
+        238.0,
+        320.0,
+        406.0
+      ],
+      "mask_area": 39807
+    },
+    {
+      "frame": 68,
+      "timestamp": 2.8361666666666663,
+      "track_id": 1,
+      "status": "visible",
+      "x": 995.0,
+      "y": 444.5,
+      "box": [
+        829.0,
+        242.0,
+        332.0,
+        405.0
+      ],
+      "mask_area": 42881
+    },
+    {
+      "frame": 69,
+      "timestamp": 2.877875,
+      "track_id": 1,
+      "status": "visible",
+      "x": 989.5,
+      "y": 446.5,
+      "box": [
+        819.0,
+        244.0,
+        341.0,
+        405.0
+      ],
+      "mask_area": 46897
+    },
+    {
+      "frame": 70,
+      "timestamp": 2.919583333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 984.0,
+      "y": 447.0,
+      "box": [
+        809.0,
+        243.0,
+        350.0,
+        408.0
+      ],
+      "mask_area": 50994
+    },
+    {
+      "frame": 71,
+      "timestamp": 2.9612916666666664,
+      "track_id": 1,
+      "status": "visible",
+      "x": 979.5,
+      "y": 446.0,
+      "box": [
+        802.0,
+        241.0,
+        355.0,
+        410.0
+      ],
+      "mask_area": 54785
+    },
+    {
+      "frame": 72,
+      "timestamp": 3.0029999999999997,
+      "track_id": 1,
+      "status": "visible",
+      "x": 975.5,
+      "y": 442.5,
+      "box": [
+        796.0,
+        236.0,
+        359.0,
+        413.0
+      ],
+      "mask_area": 58605
+    },
+    {
+      "frame": 73,
+      "timestamp": 3.044708333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 971.0,
+      "y": 436.5,
+      "box": [
+        790.0,
+        227.0,
+        362.0,
+        419.0
+      ],
+      "mask_area": 61994
+    },
+    {
+      "frame": 74,
+      "timestamp": 3.0864166666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 969.5,
+      "y": 431.0,
+      "box": [
+        788.0,
+        220.0,
+        363.0,
+        422.0
+      ],
+      "mask_area": 65163
+    },
+    {
+      "frame": 75,
+      "timestamp": 3.128125,
+      "track_id": 1,
+      "status": "visible",
+      "x": 969.5,
+      "y": 423.0,
+      "box": [
+        787.0,
+        210.0,
+        365.0,
+        426.0
+      ],
+      "mask_area": 67357
+    },
+    {
+      "frame": 76,
+      "timestamp": 3.169833333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 970.0,
+      "y": 417.5,
+      "box": [
+        787.0,
+        204.0,
+        366.0,
+        427.0
+      ],
+      "mask_area": 69364
+    },
+    {
+      "frame": 77,
+      "timestamp": 3.2115416666666663,
+      "track_id": 1,
+      "status": "visible",
+      "x": 972.5,
+      "y": 412.0,
+      "box": [
+        789.0,
+        196.0,
+        367.0,
+        432.0
+      ],
+      "mask_area": 70864
+    },
+    {
+      "frame": 78,
+      "timestamp": 3.25325,
+      "track_id": 1,
+      "status": "visible",
+      "x": 975.5,
+      "y": 405.5,
+      "box": [
+        791.0,
+        189.0,
+        369.0,
+        433.0
+      ],
+      "mask_area": 72028
+    },
+    {
+      "frame": 79,
+      "timestamp": 3.294958333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 979.0,
+      "y": 400.0,
+      "box": [
+        795.0,
+        184.0,
+        368.0,
+        432.0
+      ],
+      "mask_area": 73552
+    },
+    {
+      "frame": 80,
+      "timestamp": 3.3366666666666664,
+      "track_id": 1,
+      "status": "visible",
+      "x": 985.5,
+      "y": 395.5,
+      "box": [
+        801.0,
+        180.0,
+        369.0,
+        431.0
+      ],
+      "mask_area": 74237
+    },
+    {
+      "frame": 81,
+      "timestamp": 3.3783749999999997,
+      "track_id": 1,
+      "status": "visible",
+      "x": 991.5,
+      "y": 390.5,
+      "box": [
+        806.0,
+        177.0,
+        371.0,
+        427.0
+      ],
+      "mask_area": 75326
+    },
+    {
+      "frame": 82,
+      "timestamp": 3.420083333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 997.0,
+      "y": 387.5,
+      "box": [
+        812.0,
+        177.0,
+        370.0,
+        421.0
+      ],
+      "mask_area": 75052
+    },
+    {
+      "frame": 83,
+      "timestamp": 3.4617916666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1000.0,
+      "y": 385.0,
+      "box": [
+        815.0,
+        176.0,
+        370.0,
+        418.0
+      ],
+      "mask_area": 76106
+    },
+    {
+      "frame": 84,
+      "timestamp": 3.5035,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1004.0,
+      "y": 382.5,
+      "box": [
+        821.0,
+        174.0,
+        366.0,
+        417.0
+      ],
+      "mask_area": 75466
+    },
+    {
+      "frame": 85,
+      "timestamp": 3.545208333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1006.5,
+      "y": 381.5,
+      "box": [
+        824.0,
+        174.0,
+        365.0,
+        415.0
+      ],
+      "mask_area": 75363
+    },
+    {
+      "frame": 86,
+      "timestamp": 3.5869166666666663,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1011.0,
+      "y": 382.0,
+      "box": [
+        830.0,
+        178.0,
+        362.0,
+        408.0
+      ],
+      "mask_area": 73208
+    },
+    {
+      "frame": 87,
+      "timestamp": 3.6286249999999995,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1014.5,
+      "y": 382.5,
+      "box": [
+        833.0,
+        181.0,
+        363.0,
+        403.0
+      ],
+      "mask_area": 71282
+    },
+    {
+      "frame": 88,
+      "timestamp": 3.6703333333333332,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1020.0,
+      "y": 382.0,
+      "box": [
+        839.0,
+        182.0,
+        362.0,
+        400.0
+      ],
+      "mask_area": 69635
+    },
+    {
+      "frame": 89,
+      "timestamp": 3.7120416666666665,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1023.0,
+      "y": 383.0,
+      "box": [
+        842.0,
+        184.0,
+        362.0,
+        398.0
+      ],
+      "mask_area": 69477
+    },
+    {
+      "frame": 90,
+      "timestamp": 3.7537499999999997,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1025.0,
+      "y": 384.5,
+      "box": [
+        844.0,
+        188.0,
+        362.0,
+        393.0
+      ],
+      "mask_area": 68911
+    },
+    {
+      "frame": 91,
+      "timestamp": 3.795458333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1028.0,
+      "y": 386.5,
+      "box": [
+        845.0,
+        192.0,
+        366.0,
+        389.0
+      ],
+      "mask_area": 68566
+    },
+    {
+      "frame": 92,
+      "timestamp": 3.8371666666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1034.0,
+      "y": 388.5,
+      "box": [
+        851.0,
+        196.0,
+        366.0,
+        385.0
+      ],
+      "mask_area": 68735
+    },
+    {
+      "frame": 93,
+      "timestamp": 3.878875,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1038.0,
+      "y": 393.0,
+      "box": [
+        853.0,
+        203.0,
+        370.0,
+        380.0
+      ],
+      "mask_area": 68853
+    },
+    {
+      "frame": 94,
+      "timestamp": 3.920583333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1043.0,
+      "y": 398.0,
+      "box": [
+        854.0,
+        210.0,
+        378.0,
+        376.0
+      ],
+      "mask_area": 69980
+    },
+    {
+      "frame": 95,
+      "timestamp": 3.9622916666666663,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1047.0,
+      "y": 404.0,
+      "box": [
+        856.0,
+        220.0,
+        382.0,
+        368.0
+      ],
+      "mask_area": 70649
+    },
+    {
+      "frame": 96,
+      "timestamp": 4.004,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1051.5,
+      "y": 411.5,
+      "box": [
+        857.0,
+        229.0,
+        389.0,
+        365.0
+      ],
+      "mask_area": 71545
+    },
+    {
+      "frame": 97,
+      "timestamp": 4.045708333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1056.0,
+      "y": 419.5,
+      "box": [
+        858.0,
+        239.0,
+        396.0,
+        361.0
+      ],
+      "mask_area": 73154
+    },
+    {
+      "frame": 98,
+      "timestamp": 4.087416666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1061.0,
+      "y": 426.0,
+      "box": [
+        859.0,
+        245.0,
+        404.0,
+        362.0
+      ],
+      "mask_area": 75311
+    },
+    {
+      "frame": 99,
+      "timestamp": 4.129124999999999,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1064.5,
+      "y": 433.0,
+      "box": [
+        857.0,
+        252.0,
+        415.0,
+        362.0
+      ],
+      "mask_area": 77064
+    },
+    {
+      "frame": 100,
+      "timestamp": 4.170833333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1068.0,
+      "y": 442.5,
+      "box": [
+        855.0,
+        259.0,
+        426.0,
+        367.0
+      ],
+      "mask_area": 78675
+    },
+    {
+      "frame": 101,
+      "timestamp": 4.212541666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1071.5,
+      "y": 441.0,
+      "box": [
+        855.0,
+        266.0,
+        433.0,
+        350.0
+      ],
+      "mask_area": 78278
+    },
+    {
+      "frame": 102,
+      "timestamp": 4.25425,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1074.5,
+      "y": 441.0,
+      "box": [
+        853.0,
+        270.0,
+        443.0,
+        342.0
+      ],
+      "mask_area": 78725
+    },
+    {
+      "frame": 103,
+      "timestamp": 4.295958333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1077.5,
+      "y": 445.0,
+      "box": [
+        853.0,
+        272.0,
+        449.0,
+        346.0
+      ],
+      "mask_area": 79911
+    },
+    {
+      "frame": 104,
+      "timestamp": 4.337666666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1080.0,
+      "y": 446.5,
+      "box": [
+        853.0,
+        276.0,
+        454.0,
+        341.0
+      ],
+      "mask_area": 79385
+    },
+    {
+      "frame": 105,
+      "timestamp": 4.379375,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1081.0,
+      "y": 451.5,
+      "box": [
+        853.0,
+        283.0,
+        456.0,
+        337.0
+      ],
+      "mask_area": 78332
+    },
+    {
+      "frame": 106,
+      "timestamp": 4.421083333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1082.0,
+      "y": 451.5,
+      "box": [
+        853.0,
+        288.0,
+        458.0,
+        327.0
+      ],
+      "mask_area": 77292
+    },
+    {
+      "frame": 107,
+      "timestamp": 4.462791666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1083.0,
+      "y": 450.0,
+      "box": [
+        854.0,
+        291.0,
+        458.0,
+        318.0
+      ],
+      "mask_area": 77262
+    },
+    {
+      "frame": 108,
+      "timestamp": 4.504499999999999,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1083.5,
+      "y": 452.0,
+      "box": [
+        855.0,
+        295.0,
+        457.0,
+        314.0
+      ],
+      "mask_area": 77716
+    },
+    {
+      "frame": 109,
+      "timestamp": 4.546208333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1082.0,
+      "y": 453.5,
+      "box": [
+        853.0,
+        301.0,
+        458.0,
+        305.0
+      ],
+      "mask_area": 77366
+    },
+    {
+      "frame": 110,
+      "timestamp": 4.587916666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1080.0,
+      "y": 457.5,
+      "box": [
+        852.0,
+        304.0,
+        456.0,
+        307.0
+      ],
+      "mask_area": 77971
+    },
+    {
+      "frame": 111,
+      "timestamp": 4.629625,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1079.0,
+      "y": 462.5,
+      "box": [
+        852.0,
+        306.0,
+        454.0,
+        313.0
+      ],
+      "mask_area": 78892
+    },
+    {
+      "frame": 112,
+      "timestamp": 4.671333333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1077.0,
+      "y": 463.0,
+      "box": [
+        851.0,
+        307.0,
+        452.0,
+        312.0
+      ],
+      "mask_area": 80421
+    },
+    {
+      "frame": 113,
+      "timestamp": 4.713041666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1073.0,
+      "y": 450.5,
+      "box": [
+        850.0,
+        309.0,
+        446.0,
+        283.0
+      ],
+      "mask_area": 79462
+    },
+    {
+      "frame": 114,
+      "timestamp": 4.75475,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1066.5,
+      "y": 452.0,
+      "box": [
+        847.0,
+        311.0,
+        439.0,
+        282.0
+      ],
+      "mask_area": 79982
+    },
+    {
+      "frame": 115,
+      "timestamp": 4.796458333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1061.5,
+      "y": 454.5,
+      "box": [
+        846.0,
+        314.0,
+        431.0,
+        281.0
+      ],
+      "mask_area": 78332
+    },
+    {
+      "frame": 116,
+      "timestamp": 4.838166666666666,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1057.0,
+      "y": 459.5,
+      "box": [
+        845.0,
+        321.0,
+        424.0,
+        277.0
+      ],
+      "mask_area": 74979
+    },
+    {
+      "frame": 117,
+      "timestamp": 4.879874999999999,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1054.5,
+      "y": 462.0,
+      "box": [
+        845.0,
+        325.0,
+        419.0,
+        274.0
+      ],
+      "mask_area": 73593
+    },
+    {
+      "frame": 118,
+      "timestamp": 4.921583333333333,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1051.0,
+      "y": 465.5,
+      "box": [
+        844.0,
+        333.0,
+        414.0,
+        265.0
+      ],
+      "mask_area": 70499
+    },
+    {
+      "frame": 119,
+      "timestamp": 4.963291666666667,
+      "track_id": 1,
+      "status": "visible",
+      "x": 1047.5,
+      "y": 468.0,
+      "box": [
+        843.0,
+        341.0,
+        409.0,
+        254.0
+      ],
+      "mask_area": 67440
+    }
+  ],
+  "statistics": {
+    "1": {
+      "observed_frames": 120,
+      "first_frame": 0,
+      "last_frame": 119,
+      "first_timestamp": 0.0,
+      "last_timestamp": 4.963291666666667,
+      "span_seconds": 4.963291666666667,
+      "coverage": 1.0,
+      "interruptions": 0,
+      "mean_box_area": 117762.34166666666,
+      "displacement_pixels": 342.94970476733175,
+      "path_length_pixels": 931.598074673087
+    }
+  },
+  "events": {
+    "1": [
+      {
+        "frame": 0,
+        "kind": "first_observation",
+        "inferred": false
+      },
+      {
+        "frame": 119,
+        "kind": "last_observation",
+        "inferred": false
+      }
+    ]
+  }
+}

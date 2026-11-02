@@ -163,6 +163,15 @@ def test_sam2_video_integration_and_cleanup(tmp_path, monkeypatch):
     inject_predictor(monkeypatch, predictor)
     settings = options(rois=((20, 30, 20, 20), (55, 30, 20, 20)), start=1 / 12, max_frames=2)
     assert process_video(source, output, DetectionConfig(), settings, tmp_path / "debug") == 2
+    from fishtrack.analysis import load_run, result_path
+
+    run = load_run(result_path(output))
+    assert run.completion == "complete" and run.backend == "sam2"
+    assert run.processed_frames == 2 and len(run.observations) == 4
+    assert run.observations[0].frame == 1
+    assert run.observations[-1].timestamp == pytest.approx(2 / 12)
+    assert run.observations[0].mask_area > 0
+    assert run.configuration["selected_rois"] == [[20, 30, 20, 20], [55, 30, 20, 20]]
     assert source.read_bytes() == original and not predictor.directory.exists()
     assert len(predictor.prompts) == 2
     assert predictor.prompts[1]["obj_id"] == 2 and predictor.prompts[1]["frame_idx"] == 0

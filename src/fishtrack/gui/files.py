@@ -5,6 +5,7 @@ from pathlib import Path
 
 import cv2
 
+from fishtrack.analysis import result_path
 from fishtrack.detection import Image
 from fishtrack.gui.settings import UiOptions
 from fishtrack.video import VideoMetadata, read_metadata
@@ -53,7 +54,11 @@ def output_path(source: Path, options: UiOptions) -> Path:
         if Path(name).name != name or "\\" in name or Path(name).suffix.lower() != ".mp4":
             raise ValueError("Output name must be an MP4 filename without a folder")
         candidate = folder / name
-        if candidate.resolve() == source.resolve() or candidate.exists():
+        if (
+            candidate.resolve() == source.resolve()
+            or candidate.exists()
+            or result_path(candidate).exists()
+        ):
             raise ValueError("Choose a new output filename; existing files are never overwritten")
         return candidate
     find_method = "Auto" if options.selection == "automatic" else "Manual"
@@ -61,7 +66,11 @@ def output_path(source: Path, options: UiOptions) -> Path:
     stem = f"{source.stem}-{find_method}-{method}-tracked"
     candidate = folder / f"{stem}.mp4"
     number = 1
-    while candidate.exists() or candidate.resolve() == source.resolve():
+    while (
+        candidate.exists()
+        or result_path(candidate).exists()
+        or candidate.resolve() == source.resolve()
+    ):
         candidate = folder / f"{stem}-{number:03d}.mp4"
         number += 1
     return candidate
